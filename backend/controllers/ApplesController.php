@@ -103,6 +103,16 @@ class ApplesController extends \yii\web\Controller
         return $this->redirect('index');
     }
 
+    /**
+     * Откат времени падения яблок
+     */
+    public function actionUptime()
+    {
+
+        Apples::Uptime();
+        return $this->redirect('index');
+    }
+
 
     /**
      * Finds the Apples model based on its primary key value.

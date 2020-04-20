@@ -19,7 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Создать яблоки!', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Состарить упавшие яблоки на 5 часов!', ['scroll'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Состарить упавшие яблоки на 1 час!', ['uptime'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Управление цветами яблок', ['/apple-colors'], ['class' => 'btn btn-primary']) ?>
     </p>
 
 

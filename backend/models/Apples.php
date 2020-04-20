@@ -48,12 +48,24 @@ class Apples extends \common\models\Apples
 
     public static function getAllRotten()
     {
-        $time = Yii::$app->formatter->asTimestamp(date("Y-m-d H:i:s", strtotime('-5 hours')));
+        $time = time() - 5*60*60;
+
         $models = self::find()->where(['<', self::tableName() . '.fell_at', $time])->all();
         foreach ($models as $model)
         {
             $model->rotten();
         }
+    }
+
+    public static function Uptime()
+    {
+        $models = self::find()->andWhere(['status' => AppleStatus::STATUS_ON_GROUND])->all();
+        foreach ($models as $model)
+        {
+            $model->fell_at -= 1*60*60 ;
+            $model->save();
+        }
+        return true;
     }
 
     public function rotten()
