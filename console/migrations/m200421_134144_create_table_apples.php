@@ -17,7 +17,7 @@ class m200421_134144_create_table_apples extends Migration
             'id' => $this->primaryKey()->notNull(),
             'size' => $this->double(5)->defaultValue(100),
             'status' => $this->tinyInteger(4)->defaultValue(1),
-            'color_id' => $this->tinyInteger(4),
+            'color_id' => $this->integer(11),
             'created_at' => $this->integer(11),
             'fell_at' => $this->integer(11),
 
