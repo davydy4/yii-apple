@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\Apple;
 use backend\models\AppleStatus;
 use Yii;
 use backend\models\AppleColors;
@@ -38,15 +39,21 @@ class ApplesController extends \yii\web\Controller
     public function actionCreate()
     {
         $count = rand(5, 10);
-
+        $models = [];
         for ($i = 0; $i < $count; $i++) {
             $color = AppleColors::getRandColors();
-            $model = new Apples();
-            $model->color_id = $color;
-            $model->save();
-        }
+            $model = new Apple($color);
+            if ($model->save())
+            {
+                $models[] = $model->id;
+            }
 
-        Yii::$app->session->addFlash('success', sprintf('Создано %s яблок', $count));
+        }
+        if (count(array_diff($models, array(''))) > 0) {
+            Yii::$app->session->addFlash('success', sprintf('Создано %s яблок', count(array_diff($models, array('')))));
+        }
+        else
+            Yii::$app->session->addFlash('danger', 'Нельзя создать яблоки без цвета');
 
         return $this->redirect('index');
     }
@@ -78,17 +85,17 @@ class ApplesController extends \yii\web\Controller
     /**
      * Поедание яблока
      */
-    public function actionEat($id, $percent = 25)
+    public function actionEat($id)
     {
-
         $model = $this->findModel($id);
+        $model->load(Yii::$app->request->post());
 
-        if (!$model->eat($percent))
+        if (!$model->eat((int)$model->percent))
         {
             Yii::$app->session->addFlash('warning', sprintf('Яблоко %s нельзя кусить', $id));
             return $this->redirect('index');
         }
-        Yii::$app->session->addFlash('success', sprintf('Яблоко %s откушено на %d процентов', $id, $percent ));
+        Yii::$app->session->addFlash('success', sprintf('Яблоко %s откушено на %d процентов', $id, $model->percent));
         return $this->redirect('index');
     }
 

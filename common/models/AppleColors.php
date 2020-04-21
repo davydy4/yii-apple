@@ -28,7 +28,7 @@ class AppleColors extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'name'], 'required'],
+            [['name'], 'required'],
             [['id'], 'integer'],
             [['name'], 'string', 'max' => 100],
             [['id'], 'unique'],

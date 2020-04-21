@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "50114089d7de41b6fbcc4d646295169a",
+    "content-hash": "5cdbfb32ad7b75bd745cc699a136d6a1",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -623,6 +623,47 @@
                 "shim"
             ],
             "time": "2020-02-27T09:26:54+00:00"
+        },
+        {
+            "name": "tmukherjee13/yii2-reverse-migration",
+            "version": "v2.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tmukherjee13/yii2-reverse-migration.git",
+                "reference": "485b14ec265f56b5256b2e9365e97b7c2202b404"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tmukherjee13/yii2-reverse-migration/zipball/485b14ec265f56b5256b2e9365e97b7c2202b404",
+                "reference": "485b14ec265f56b5256b2e9365e97b7c2202b404",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": ">2.0.6"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "tmukherjee13\\migration\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Tarun Mukherjee",
+                    "email": "tmukherjee13@gmail.com"
+                }
+            ],
+            "description": "Generate working migration classes from existing Database",
+            "keywords": [
+                "database",
+                "migration",
+                "yii2"
+            ],
+            "time": "2018-06-24T15:50:32+00:00"
         },
         {
             "name": "yiisoft/yii2",

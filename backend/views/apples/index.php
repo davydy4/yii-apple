@@ -5,7 +5,8 @@ use yii\grid\GridView;
 use backend\models\AppleColors;
 use backend\models\AppleStatus;
 use backend\models\Apples;
-
+use yii\bootstrap\Modal;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -31,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'color_id',
                 'value' => function ($data) {
-                    return $data->color->name;
+                    return $data->color;
                 }
             ],
             [
@@ -68,13 +69,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         if (!$data->canDrop()) {
                             return '';
                         }
-                        return Html::a('Уронить', $url, ['data-method' => 'POST']);
+                        return Html::a('Уронить', $url, ['data-method' => 'POST', 'class' => 'btn btn-success']);
                     },
                     'eat' => function ($url, $data) {
                         if (!$data->canEat()) {
                             return '';
                         }
-                        return Html::a('Кусить', $url, ['data-method' => 'POST']);
+                        return $this->render('_form', ['model' => $data]);
+
                     },
                 ]
             ],
@@ -86,5 +88,30 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-
 </div>
+
+
+<?php
+$js = '';
+$js .= '
+$(document).on("click", ".js-open-percent", function (){
+    let url = $(this).data("url");
+    let id = $(this).data("id");
+    $(".js-block-" + id).show();
+    alert ("URL" + url + "Яблоко" + id);
+    
+    
+});
+';
+$this->registerJs($js);
+$css = '';
+$css .='
+input{display: block;}
+.js-block{display:none;    
+position: absolute;
+    background: #fff;
+    z-index: 1;
+    border: 1px solid;
+    padding: 10px 15px;}
+';
+$this->registerCss($css);

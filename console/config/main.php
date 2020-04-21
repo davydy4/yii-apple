@@ -20,6 +20,10 @@ return [
             'class' => 'yii\console\controllers\FixtureController',
             'namespace' => 'common\fixtures',
           ],
+        'migration' => [
+            'class' => 'tmukherjee13\migration\console\controllers\MigrationController',
+            'templateFile' => '@tmukherjee13/migration/views/template.php',
+        ],
     ],
     'components' => [
         'log' => [

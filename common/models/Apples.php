@@ -21,6 +21,8 @@ use yii\db\Expression;
  */
 class Apples extends \yii\db\ActiveRecord
 {
+
+
     /**
      * {@inheritdoc}
      */
@@ -35,6 +37,7 @@ class Apples extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['color_id'], 'required'],
             [['size'], 'number'],
             [['status', 'color_id', 'created_at', 'fell_at'], 'integer'],
             [['color_id'], 'exist', 'skipOnError' => true, 'targetClass' => AppleColors::class, 'targetAttribute' => ['color_id' => 'id']],
@@ -51,7 +54,9 @@ class Apples extends \yii\db\ActiveRecord
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::class,
-                'updatedAtAttribute' => false
+                'updatedAtAttribute' => false,
+                // в соответствии с ТЗ случайное значение даты создания яблока
+                'value' => rand(0, time()),
             ],
         ];
     }
@@ -73,13 +78,18 @@ class Apples extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Color]].
+     * Gets query for [[AppleColor]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getColor()
+    public function getAppleColor()
     {
         return $this->hasOne(AppleColors::class, ['id' => 'color_id']);
+    }
+
+    public function getColor()
+    {
+        return $this->appleColor->name;
     }
 
     /**

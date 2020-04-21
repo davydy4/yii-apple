@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "apples".
@@ -17,6 +18,32 @@ use Yii;
  */
 class Apples extends \common\models\Apples
 {
+    public $percent;
+
+    public function rules()
+    {
+        return ArrayHelper::merge(
+            parent::rules(),
+            [
+                [['percent'], 'default', 'value' => 0],
+                [['percent'], 'number','min'=> 0, 'max' => $this->size],
+            ]
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return ArrayHelper::merge(
+            parent::attributeLabels(),
+            [
+                'percent' => 'Процент укуса',
+            ]
+        );
+    }
+
     public function canEat()
     {
         return $this->status === AppleStatus::STATUS_ON_GROUND;
@@ -74,4 +101,5 @@ class Apples extends \common\models\Apples
         $this->save();
         return true;
     }
+
 }

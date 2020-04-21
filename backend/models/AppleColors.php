@@ -21,6 +21,11 @@ class AppleColors extends \common\models\AppleColors
     public static function getRandColors()
     {
         $colors = ArrayHelper::map(self::find()->all(), 'id', 'id');
-        return $colors[array_rand($colors)];
+        if (!empty($colors))
+        {
+            return $colors[array_rand($colors)];
+        }
+        return null;
+
     }
 }
